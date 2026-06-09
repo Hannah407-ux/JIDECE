@@ -3,23 +3,23 @@ import Image from "next/image";
 const newsItems = [
   {
     id: 1,
-    image: "/images/news1.jpg",
+    image: "/imagesnews1.jpg",
     title: "Campus Water Main Repair Nurturing Future Sytemmtxnail Deadline",
     description:
       "The West Wing will be without Wing without water from from 10 A...",
   },
   {
     id: 2,
-    image: "/images/news2.jpg",
-    title: "Term 2 Syllabus Upload Uploxd Deadline",
+    image: "/image2.jpg",
+    title: "Term 2 Syllabus Upload Deadline",
     description:
-      "All taching staff shaff must osoontial information orhrai naat upload their finalized...",
+      "All teaching staff  must have information that upload their finalized...",
     date: "14 Sept 20",
   },
 ];
 
 const galleryImages = [
-  "/gallery1.jpeg",
+  "/gallery1.jpg",
   "/gallery2.jpg",
   "/gallery3.jpg",
   "/gallery4.jpg",
