@@ -49,13 +49,13 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* LEFT */}
           <div className="space-y-4">
-            <InfoRow icon={<MapPin />} title="Address" text="Lagos, Nigeria" />
+            <InfoRow icon={<MapPin />} title="Address" text="Ogbomoso, Nigeria" />
             <InfoRow
               icon={<Mail />}
               title="Email"
-              text="info@jideceacademy.com"
+              text="jideceacademy@gmail.com"
             />
-            <InfoRow icon={<Phone />} title="Phone" text="+234 800 000 0000" />
+            <InfoRow icon={<Phone />} title="Phone" text="+234 8084654907" />
             <InfoRow
               icon={<Clock />}
               title="Hours"

@@ -1,9 +1,6 @@
 import Link from "next/link";
 import {
   FaFacebook,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
   FaWhatsapp,
 } from "react-icons/fa";
 
@@ -65,9 +62,6 @@ export default function Footer() {
             <div className="flex flex-wrap gap-3">
               {[
                 FaFacebook,
-                FaInstagram,
-                FaLinkedinIn,
-                FaYoutube,
                 FaWhatsapp,
               ].map((Icon, i) => (
                 <a
