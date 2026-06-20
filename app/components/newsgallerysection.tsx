@@ -13,7 +13,7 @@ const newsItems = [
     image: "/image2.jpg",
     title: "Term 2 Syllabus Upload Deadline",
     description:
-      "All teaching staff  must have information that upload their finalized...",
+      "All teaching staff  have information that upload their finalized...",
     date: "14 Sept 20",
   },
 ];

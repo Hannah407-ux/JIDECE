@@ -96,7 +96,7 @@ export default function AboutPage() {
               </h2>
 
               <p className="uppercase tracking-widest text-yellow-700 text-sm mt-2">
-                Dr. Eleanor Sterling
+                Miss Oyegoke
               </p>
 
               <div className="bg-white mt-6 p-8 rounded-2xl shadow-sm">
