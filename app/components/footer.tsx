@@ -9,107 +9,98 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#072B5A] text-white">
-      <div className="max-w-7xl mx-auto px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Quick Links */}
+    <footer className="bg-[#061F3E] text-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* QUICK LINKS */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6">Quick Links</h3>
+            <h3 className="text-lg md:text-xl font-semibold mb-4">
+              Quick Links
+            </h3>
 
-            <ul className="space-y-2 text-gray-300">
-              <li>
-                <Link href="/" className="hover:text-yellow-400">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-yellow-400">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/academics" className="hover:text-yellow-400">
-                  Academics
-                </Link>
-              </li>
-              <li>
-                <Link href="/news-events" className="hover:text-yellow-400">
-                  News & Events
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="hover:text-yellow-400">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-yellow-400">
-                  Contact Us
-                </Link>
-              </li>
+            <ul className="space-y-2 text-gray-300 text-sm">
+              {[
+                ["Home", "/"],
+                ["About Us", "/about"],
+                ["Academics", "/academics"],
+                ["News & Events", "/news-events"],
+                ["Gallery", "/gallery"],
+                ["Contact", "/contact"],
+              ].map(([name, href]) => (
+                <li key={name}>
+                  <Link
+                    href={href}
+                    className="hover:text-yellow-400 transition"
+                  >
+                    {name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Information */}
+          {/* CONTACT */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+            <h3 className="text-lg md:text-xl font-semibold mb-4">Contact</h3>
 
-            <div className="space-y-4 text-gray-300">
+            <div className="space-y-3 text-sm text-gray-300 leading-6">
               <p>
-                idi-oro off ogojo road ,
+                Idi-Oro off Ogojo Road,
                 <br />
-                ogbomoso,oyo state
+                Ogbomoso, Oyo State
               </p>
 
-              <p>Phone: (+234) 7019562291</p>
-
-              <p>Email: jidece@gmail.com</p>
+              <p>📞 +234 701 956 2291</p>
+              <p>✉️ jidece@gmail.com</p>
             </div>
           </div>
 
-          {/* Social Media */}
+          {/* SOCIAL */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6">Social Media</h3>
-
-            <div className="grid grid-cols-3 gap-4 w-fit">
-              <a href="#" className="text-4xl hover:text-yellow-400 transition">
-                <FaFacebook />
-              </a>
-
-              <a href="#" className="text-4xl hover:text-yellow-400 transition">
-                <FaInstagram />
-              </a>
-
-              <a href="#" className="text-4xl hover:text-yellow-400 transition">
-                <FaLinkedinIn />
-              </a>
-
-              <a href="#" className="text-4xl hover:text-yellow-400 transition">
-                <FaYoutube />
-              </a>
-
-              <a href="#" className="text-4xl hover:text-yellow-400 transition">
-                <FaWhatsapp />
-              </a>
-            </div>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-6">
-              Newsletter Subscription
+            <h3 className="text-lg md:text-xl font-semibold mb-4">
+              Connect With Us
             </h3>
 
-            <form className="space-y-4">
+            <div className="flex flex-wrap gap-3">
+              {[
+                FaFacebook,
+                FaInstagram,
+                FaLinkedinIn,
+                FaYoutube,
+                FaWhatsapp,
+              ].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-900 hover:bg-yellow-400 hover:text-black transition"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* NEWSLETTER */}
+          <div>
+            <h3 className="text-lg md:text-xl font-semibold mb-4">
+              Newsletter
+            </h3>
+
+            <p className="text-sm text-gray-300 mb-4">
+              Get updates about admissions, news and events.
+            </p>
+
+            <form className="space-y-3">
               <input
                 type="email"
-                placeholder="Enter email address..."
-                className="w-full h-12 px-4 rounded-md text-black outline-none"
+                placeholder="Email address"
+                className="w-full px-4 py-3 rounded-lg text-black outline-none focus:ring-2 focus:ring-yellow-400"
               />
 
               <button
                 type="submit"
-                className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-md transition"
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-3 rounded-lg transition"
               >
                 Subscribe
               </button>
@@ -117,11 +108,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-blue-700 mt-10 pt-6">
-          <p className="text-center text-gray-300 text-sm">
-            © 2026 Jidece International Academy. All rights reserved.
-          </p>
+        {/* DIVIDER */}
+        <div className="border-t border-blue-800 mt-10 pt-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+            <p>© 2026 Jidece International Academy. All rights reserved.</p>
+
+            <p className="text-xs text-gray-500">
+              Built with care for education & excellence
+            </p>
+          </div>
         </div>
       </div>
     </footer>

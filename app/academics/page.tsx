@@ -1,176 +1,162 @@
 import Footer from "@/app/components/footer";
 import Navbar from "@/app/components/navbar";
 import Image from "next/image";
-import {
-  FlaskConical,
-  Palette,
-  Globe,
-} from "lucide-react";
+import { FlaskConical, Palette, Globe } from "lucide-react";
 
 export default function AcademicsPage() {
   return (
     <main className="bg-[#F5F7FC] min-h-screen">
-         <Navbar />
+      <Navbar />
 
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto text-center py-28 px-6">
-        <h1 className="text-5xl md:text-6xl font-bold text-[#0B2345] font-serif">
+      {/* HERO */}
+      <section className="max-w-5xl mx-auto text-center py-20 md:py-28 px-4">
+        <h1 className="text-3xl md:text-6xl font-bold text-[#0B2345] font-serif">
           Our Academic Excellence
         </h1>
 
-        <p className="mt-8 text-xl text-gray-600 leading-10 max-w-4xl mx-auto">
-          At Jidece International Academy, we foster a culture of
-          intellectual curiosity and rigorous scholarship. Our holistic
-          curriculum blends traditional academic excellence with
-          innovative, future-ready learning approaches to prepare
-          students for global leadership.
+        <p className="mt-6 md:mt-8 text-base md:text-xl text-gray-600 leading-7 md:leading-10 max-w-4xl mx-auto">
+          At Jidece International Academy, we foster a culture of intellectual
+          curiosity and rigorous scholarship. Our holistic curriculum blends
+          traditional academic excellence with innovative, future-ready
+          learning.
         </p>
       </section>
 
-      {/* Academic Pathways */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <h2 className="text-center text-5xl font-bold text-[#0B2345] font-serif mb-20">
+      {/* PATHWAYS */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+        <h2 className="text-center text-3xl md:text-5xl font-bold text-[#0B2345] font-serif mb-12 md:mb-20">
           Academic Pathways
         </h2>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-
-          {/* Nursery */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* NURSERY */}
           <div className="bg-white rounded-3xl overflow-hidden shadow-sm">
-            <div className="relative h-[250px]">
+            <div className="relative h-[220px]">
               <Image
-                src="/nursery.jpg"
+                src="https://media.gettyimages.com/id/2254939960/photo/teacher-raising-hand-while-playing-leisure-games.jpg?s=612x612&w=0&k=20&c=wBFIfNqArd6pfwf4YyF63VjxU3KoBpu2cgYwiZr9uLw="
                 alt="Nursery School"
                 fill
                 className="object-cover"
               />
             </div>
 
-            <div className="p-8">
-              <div className="w-14 h-1 bg-yellow-600 mb-6"></div>
+            <div className="p-6 md:p-8">
+              <div className="w-14 h-1 bg-yellow-600 mb-5" />
 
-              <h3 className="text-4xl font-bold text-[#0B2345] font-serif mb-5">
+              <h3 className="text-2xl md:text-4xl font-bold text-[#0B2345] font-serif mb-4">
                 Nursery School
               </h3>
 
-              <p className="text-gray-600 leading-8">
-                Our Early Years foundation follows a blended Montessori
-                approach, encouraging self-directed learning,
-                exploration, and the development of fundamental
-                cognitive and social skills in a nurturing environment.
+              <p className="text-gray-600 leading-7">
+                Montessori-based early learning encouraging creativity and
+                foundational skills.
               </p>
 
-              <h4 className="mt-8 mb-4 text-sm font-bold tracking-wider text-gray-700 uppercase">
+              <h4 className="mt-6 mb-3 text-xs font-bold tracking-wider text-gray-700 uppercase">
                 Key Focus Areas
               </h4>
 
-              <div className="flex flex-wrap gap-3 mb-8">
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Phonics & Literacy
-                </span>
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Numeracy
-                </span>
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Creative Play
-                </span>
+              {/* TAGS FIXED */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {["Phonics & Literacy", "Numeracy", "Creative Play"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1 bg-blue-100 rounded-full text-xs md:text-sm text-gray-700"
+                    >
+                      {item}
+                    </span>
+                  ),
+                )}
               </div>
 
-              <button className="w-full border border-[#0B2345] rounded-md py-3 font-medium hover:bg-[#0B2345] hover:text-white transition">
+              <button className="w-full border cursor-pointer border-[#0B2345] rounded-md py-3 font-medium text-[#0B2345] hover:bg-[#0B2345] hover:text-white transition">
                 Learn More
               </button>
             </div>
           </div>
 
-          {/* Primary */}
+          {/* PRIMARY */}
           <div className="bg-white rounded-3xl overflow-hidden shadow-sm">
-            <div className="relative h-[250px]">
+            <div className="relative h-[220px]">
               <Image
-                src="/primary.jpg"
+                src="https://images.unsplash.com/photo-1588072432836-e10032774350"
                 alt="Primary School"
                 fill
                 className="object-cover"
               />
             </div>
 
-            <div className="p-8">
-              <div className="w-14 h-1 bg-yellow-600 mb-6"></div>
+            <div className="p-6 md:p-8">
+              <div className="w-14 h-1 bg-yellow-600 mb-5" />
 
-              <h3 className="text-4xl font-bold text-[#0B2345] font-serif mb-5">
+              <h3 className="text-2xl md:text-4xl font-bold text-[#0B2345] font-serif mb-4">
                 Primary School
               </h3>
 
-              <p className="text-gray-600 leading-8">
-                Building on early foundations, our primary curriculum
-                integrates core subjects with critical thinking and
-                inquiry-based learning, fostering independent thought
-                and a robust academic base.
+              <p className="text-gray-600 leading-7">
+                Inquiry-based learning building strong academic foundations.
               </p>
 
-              <h4 className="mt-8 mb-4 text-sm font-bold tracking-wider text-gray-700 uppercase">
+              <h4 className="mt-6 mb-3 text-xs font-bold tracking-wider text-gray-700 uppercase">
                 Key Focus Areas
               </h4>
 
-              <div className="flex flex-wrap gap-3 mb-8">
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Mathematics
-                </span>
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Sciences
-                </span>
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Languages
-                </span>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {["Mathematics", "Sciences", "Languages"].map((item) => (
+                  <span
+                    key={item}
+                    className="px-3 py-1 bg-blue-100 rounded-full text-xs md:text-sm text-gray-700"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
 
-              <button className="w-full border border-[#0B2345] rounded-md py-3 font-medium hover:bg-[#0B2345] hover:text-white transition">
+              <button className="w-full border cursor-pointer border-[#0B2345] rounded-md py-3 font-medium text-[#0B2345] hover:bg-[#0B2345] hover:text-white transition">
                 Learn More
               </button>
             </div>
           </div>
 
-          {/* Secondary */}
+          {/* SECONDARY */}
           <div className="bg-white rounded-3xl overflow-hidden shadow-sm">
-            <div className="relative h-[250px]">
+            <div className="relative h-[220px]">
               <Image
-                src="/secondary.jpg"
+                src="https://media.gettyimages.com/id/2148729202/photo/happy-friends-talking-while-walking-with-arms-in-arms.jpg?s=612x612&w=0&k=20&c=HLxQapZLpu8TAUjPSlWPXBtQQl0K1pmXJ9RmaMJwr4Q="
                 alt="Secondary School"
                 fill
                 className="object-cover"
               />
             </div>
 
-            <div className="p-8">
-              <div className="w-14 h-1 bg-yellow-600 mb-6"></div>
+            <div className="p-6 md:p-8">
+              <div className="w-14 h-1 bg-yellow-600 mb-5" />
 
-              <h3 className="text-4xl font-bold text-[#0B2345] font-serif mb-5">
+              <h3 className="text-2xl md:text-4xl font-bold text-[#0B2345] font-serif mb-4">
                 Secondary School
               </h3>
 
-              <p className="text-gray-600 leading-8">
-                Offering a rigorous dual British-Nigerian curriculum
-                designed to challenge students and prepare them for
-                top-tier universities worldwide through specialized
-                subjects and leadership opportunities.
+              <p className="text-gray-600 leading-7">
+                Advanced curriculum preparing students for global universities.
               </p>
 
-              <h4 className="mt-8 mb-4 text-sm font-bold tracking-wider text-gray-700 uppercase">
+              <h4 className="mt-6 mb-3 text-xs font-bold tracking-wider text-gray-700 uppercase">
                 Key Focus Areas
               </h4>
 
-              <div className="flex flex-wrap gap-3 mb-8">
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Advanced STEM
-                </span>
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Humanities
-                </span>
-                <span className="px-4 py-2 bg-blue-100 rounded-full text-sm">
-                  Global Economics
-                </span>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {["Advanced STEM", "Humanities", "Economics"].map((item) => (
+                  <span
+                    key={item}
+                    className="px-3 py-1 bg-blue-100 rounded-full text-xs md:text-sm text-gray-700"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
 
-              <button className="w-full border border-[#0B2345] rounded-md py-3 font-medium hover:bg-[#0B2345] hover:text-white transition">
+              <button className="w-full border cursor-pointer border-[#0B2345] rounded-md py-3 font-medium text-[#0B2345] hover:bg-[#0B2345] hover:text-white transition">
                 Learn More
               </button>
             </div>
@@ -178,65 +164,46 @@ export default function AcademicsPage() {
         </div>
       </section>
 
-      {/* Beyond The Classroom */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <h2 className="text-center text-5xl font-bold text-[#0B2345] font-serif mb-20">
+      {/* BEYOND CLASSROOM */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 py-20 md:py-24">
+        <h2 className="text-center text-3xl md:text-5xl font-bold text-[#0B2345] font-serif mb-14 md:mb-20">
           Beyond the Classroom
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: FlaskConical,
+              title: "STEM Labs",
+              text: "Hands-on robotics, coding, and science labs.",
+            },
+            {
+              icon: Palette,
+              title: "Creative Arts",
+              text: "Music, visual arts, and performance training.",
+            },
+            {
+              icon: Globe,
+              title: "Global Citizenship",
+              text: "Leadership, UN model, and community impact.",
+            },
+          ].map((item, i) => (
+            <div key={i} className="bg-white border rounded-3xl p-8 md:p-10">
+              <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+                <item.icon className="w-7 h-7 text-[#0B2345]" />
+              </div>
 
-          <div className="bg-white border rounded-3xl p-10">
-            <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-8">
-              <FlaskConical className="w-8 h-8 text-[#0B2345]" />
+              <h3 className="text-xl md:text-3xl font-bold font-serif text-[#0B2345] mb-4">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 leading-7">{item.text}</p>
             </div>
-
-            <h3 className="text-3xl font-bold font-serif text-[#0B2345] mb-4">
-              STEM Labs
-            </h3>
-
-            <p className="text-gray-600 leading-8">
-              Equipped with cutting-edge technology, our laboratories
-              provide hands-on experience in robotics, coding, and
-              advanced scientific research methodologies.
-            </p>
-          </div>
-
-          <div className="bg-white border rounded-3xl p-10">
-            <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-8">
-              <Palette className="w-8 h-8 text-[#0B2345]" />
-            </div>
-
-            <h3 className="text-3xl font-bold font-serif text-[#0B2345] mb-4">
-              Creative Arts
-            </h3>
-
-            <p className="text-gray-600 leading-8">
-              Dedicated studios for visual arts, music, and performing
-              arts encourage expressive thinking and cultural
-              appreciation alongside academic rigor.
-            </p>
-          </div>
-
-          <div className="bg-white border rounded-3xl p-10">
-            <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-8">
-              <Globe className="w-8 h-8 text-[#0B2345]" />
-            </div>
-
-            <h3 className="text-3xl font-bold font-serif text-[#0B2345] mb-4">
-              Global Citizenship
-            </h3>
-
-            <p className="text-gray-600 leading-8">
-              Integrated programs focusing on international awareness,
-              Model UN, and community service to develop ethically
-              responsible global leaders.
-            </p>
-          </div>
-
+          ))}
         </div>
       </section>
-         <Footer/>
+
+      <Footer />
     </main>
   );
 }

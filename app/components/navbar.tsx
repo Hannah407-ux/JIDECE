@@ -28,7 +28,7 @@ export default function Navbar() {
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
           <Link href="/academics">Academics</Link>
-          <Link href="/contact">Contact Us</Link>
+          <Link href="/contact-us">Contact Us</Link>
 
           <Link
             href="/apply"
@@ -64,7 +64,7 @@ export default function Navbar() {
           </Link>
           <Link
             onClick={() => setOpen(false)}
-            href="/contact"
+            href="/contact-us"
             className="block"
           >
             Contact Us
