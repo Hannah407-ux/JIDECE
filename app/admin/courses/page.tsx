@@ -12,9 +12,10 @@ import {
   Layers,
   Clock,
   User,
+  Menu,
 } from "lucide-react";
 
-// Initial Mock Data
+// Mock Data
 const INITIAL_COURSES = [
   {
     id: "1",
@@ -46,20 +47,22 @@ export default function AdminCoursesPage() {
   const [courses, setCourses] = useState(INITIAL_COURSES);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Modal States
+  // MOBILE SIDEBAR FIX
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // MODAL STATE
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit" | "delete">("add");
   const [selectedCourse, setSelectedCourse] = useState<any>(null);
 
-  // Form Field States
+  // FORM STATES
   const [formCode, setFormCode] = useState("");
   const [formTitle, setFormTitle] = useState("");
   const [formDept, setFormDept] = useState("");
   const [formDuration, setFormDuration] = useState("");
   const [formInstructor, setFormInstructor] = useState("");
 
-  // Open Modal Handler
-  const openModal = (mode: "add" | "edit" | "delete", course: any = null) => {
+  const openModal = (mode: any, course: any = null) => {
     setModalMode(mode);
     setSelectedCourse(course);
 
@@ -76,16 +79,15 @@ export default function AdminCoursesPage() {
       setFormDuration("");
       setFormInstructor("");
     }
+
     setIsModalOpen(true);
   };
 
-  // Close Modal Handler
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedCourse(null);
   };
 
-  // Submit Logic
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -98,6 +100,7 @@ export default function AdminCoursesPage() {
         duration: formDuration,
         instructor: formInstructor,
       };
+
       setCourses([...courses, newCourse]);
     } else if (modalMode === "edit" && selectedCourse) {
       setCourses(
@@ -121,7 +124,6 @@ export default function AdminCoursesPage() {
     closeModal();
   };
 
-  // Filter courses based on search query
   const filteredCourses = courses.filter(
     (course) =>
       course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -130,91 +132,111 @@ export default function AdminCoursesPage() {
   );
 
   return (
-    <div className="flex h-screen w-full bg-[#f8fafc] overflow-hidden">
-      <Sidebar />
+    <div className="flex h-screen w-full bg-[#f8fafc] overflow-hidden text-slate-900">
+      {/* SIDEBAR */}
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
+      {/* BACKDROP */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* MAIN */}
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        {/* Header Unit */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0">
-          <div>
-            <h1 className="text-xl font-semibold text-slate-900">
-              Course Management
-            </h1>
-            <p className="text-xs text-slate-500">
-              View, add, edit, or terminate curriculum courses.
-            </p>
+        {/* HEADER */}
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            {/* HAMBURGER */}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden p-2 border border-slate-300 rounded-md text-slate-900 bg-white hover:bg-slate-50"
+            >
+              <Menu className="w-5 h-5 text-slate-900" />
+            </button>
+
+            <div>
+              <h1 className="text-xl font-bold text-slate-900">
+                Course Management
+              </h1>
+              <p className="text-xs text-slate-700 font-medium">
+                Manage academic course structure
+              </p>
+            </div>
           </div>
 
           <button
             onClick={() => openModal("add")}
-            className="flex items-center gap-2 bg-[#615000] hover:bg-[#4d3f00] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm"
+            className="flex items-center gap-2 bg-[#615000] text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm hover:bg-[#4d3f00] transition-colors"
           >
-            <Plus className="w-4 h-4" />
-            <span>Add New Course</span>
+            <Plus className="w-4 h-4 text-white" />
+            Add Course
           </button>
         </header>
 
-        {/* Workspace Area */}
-        <div className="p-8 max-w-7xl w-full mx-auto space-y-6">
-          {/* Action Row: Search Filters */}
-          <div className="flex items-center max-w-md bg-white border border-slate-200 rounded-xl px-3.5 py-2 shadow-sm focus-within:border-slate-400 transition-all">
-            <Search className="w-4 h-4 text-slate-400 mr-2 shrink-0" />
+        {/* CONTENT */}
+        <div className="p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+          {/* SEARCH */}
+          <div className="flex items-center max-w-md bg-white border border-slate-300 rounded-xl px-3 py-2 shadow-sm focus-within:border-slate-500 transition-colors">
+            <Search className="w-4 h-4 text-slate-800 mr-2 shrink-0" />
             <input
-              type="text"
-              placeholder="Search by course title, code, or instructor..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
+              placeholder="Search courses..."
+              className="w-full outline-none text-sm text-slate-900 bg-white placeholder-slate-500 font-medium"
             />
           </div>
 
-          {/* Courses Grid */}
+          {/* GRID */}
           {filteredCourses.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCourses.map((course) => (
                 <div
                   key={course.id}
-                  className="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between overflow-hidden hover:shadow-md transition-shadow"
+                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="p-6 space-y-4">
-                    <div className="flex items-start justify-between">
-                      <span className="text-xs font-mono font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">
+                  <div className="p-6 space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200 px-2.5 py-1 rounded">
                         {course.code}
                       </span>
-                      <span className="text-[11px] text-slate-400 font-medium flex items-center gap-1">
-                        <Layers className="w-3 h-3" /> {course.department}
+                      <span className="text-xs text-slate-800 font-bold flex items-center gap-1 bg-slate-100 px-2 py-1 rounded">
+                        <Layers className="w-3 h-3 text-slate-700" />
+                        {course.department}
                       </span>
                     </div>
 
-                    <div>
-                      <h3 className="font-semibold text-slate-900 line-clamp-1">
-                        {course.title}
-                      </h3>
-                      <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-2">
-                        <User className="w-3.5 h-3.5 text-slate-400" />{" "}
-                        {course.instructor}
-                      </p>
-                    </div>
+                    <h3 className="font-bold text-base text-slate-900 leading-tight">
+                      {course.title}
+                    </h3>
+
+                    <p className="text-xs text-slate-800 font-semibold flex items-center gap-1.5 pt-1">
+                      <User className="w-3.5 h-3.5 text-slate-700" />
+                      {course.instructor}
+                    </p>
                   </div>
 
-                  <div className="bg-slate-50/70 border-t border-slate-100 px-6 py-3.5 flex items-center justify-between">
-                    <span className="text-xs text-slate-500 flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-slate-400" />{" "}
+                  <div className="flex items-center justify-between bg-slate-50 border-t border-slate-100 px-6 py-3.5">
+                    <span className="text-xs text-slate-800 font-semibold flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-slate-700" />
                       {course.duration}
                     </span>
 
-                    <div className="flex items-center gap-1">
+                    <div className="flex gap-1">
                       <button
                         onClick={() => openModal("edit", course)}
-                        className="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-200/60 rounded-md transition-all"
+                        className="p-2 text-slate-700 hover:bg-slate-200 hover:text-slate-900 rounded transition-colors"
                       >
-                        <Edit2 className="w-3.5 h-3.5" />
+                        <Edit2 className="w-4 h-4" />
                       </button>
+
                       <button
                         onClick={() => openModal("delete", course)}
-                        className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-all"
+                        className="p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -222,155 +244,129 @@ export default function AdminCoursesPage() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl border border-dashed border-slate-200 p-16 text-center max-w-xl mx-auto mt-12">
-              <BookOpen className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-              <h3 className="text-base font-semibold text-slate-800">
-                No courses match your criteria
-              </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Try adjusting your search parameters or register a brand new
-                module class asset above.
-              </p>
+            <div className="text-center py-20 text-slate-800 font-medium bg-white rounded-2xl border border-dashed border-slate-200">
+              <BookOpen className="w-12 h-12 mx-auto mb-3 text-slate-600" />
+              No courses found
             </div>
           )}
         </div>
       </main>
 
-      {/* ================= MODAL DIALOG LAYER ================= */}
+      {/* MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
-            className="absolute inset-0 bg-slate-900/40 "
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={closeModal}
-          ></div>
+          />
 
-          <div className="relative bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-150">
-            {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-              <h2 className="text-base font-semibold text-slate-900">
+          <div className="relative bg-white w-full max-w-md rounded-xl p-6 z-50 shadow-2xl border border-slate-200">
+            <div className="flex justify-between items-center mb-5 border-b border-slate-100 pb-3">
+              <h2 className="font-bold text-slate-900 text-lg">
                 {modalMode === "add" && "Add New Course"}
                 {modalMode === "edit" && "Edit Course Details"}
-                {modalMode === "delete" && "Confirm Deletion"}
+                {modalMode === "delete" && "Confirm Course Deletion"}
               </h2>
+
               <button
                 onClick={closeModal}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg transition-colors"
+                className="text-slate-800 hover:text-black p-1 rounded-lg hover:bg-slate-100 transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
 
-            {/* Modal Body Form */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {modalMode === "delete" ? (
-                <div className="space-y-3">
-                  <p className="text-sm text-slate-600">
-                    Are you absolutely certain you wish to delete{" "}
-                    <span className="font-semibold text-slate-900">
-                      ({selectedCourse?.code}) {selectedCourse?.title}
-                    </span>
-                    ? This action is permanent.
-                  </p>
-                  <div className="bg-red-50 text-red-700 text-xs p-3 rounded-lg border border-red-100 font-medium">
-                    Warning: Purging this component breaks systemic paths tied
-                    directly to linked student schedules.
-                  </div>
-                </div>
+                <p className="text-sm text-slate-900 font-medium py-2">
+                  Are you sure you want to delete{" "}
+                  <b className="text-black font-extrabold">
+                    ({selectedCourse?.code}) {selectedCourse?.title}
+                  </b>
+                  ? This action cannot be undone.
+                </p>
               ) : (
                 <>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-1">
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 tracking-wider">
-                        Course Code
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="CSC 501"
-                        value={formCode}
-                        onChange={(e) => setFormCode(e.target.value)}
-                        className="w-full text-sm text-slate-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:border-slate-400 bg-white"
-                      />
-                    </div>
-                    <div className="col-span-2">
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 tracking-wider">
-                        Department
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Computer Science"
-                        value={formDept}
-                        onChange={(e) => setFormDept(e.target.value)}
-                        className="w-full text-sm text-slate-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:border-slate-400 bg-white"
-                      />
-                    </div>
-                  </div>
-
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 tracking-wider">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider">
+                      Course Code
+                    </label>
+                    <input
+                      value={formCode}
+                      onChange={(e) => setFormCode(e.target.value)}
+                      placeholder="e.g. CSC 501"
+                      required
+                      className="w-full border border-slate-300 p-2.5 rounded-lg text-sm text-black bg-white font-medium focus:outline-none focus:border-slate-500 placeholder-slate-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider">
                       Course Title
                     </label>
                     <input
-                      type="text"
-                      required
-                      placeholder="e.g. Advanced Machine Learning"
                       value={formTitle}
                       onChange={(e) => setFormTitle(e.target.value)}
-                      className="w-full text-sm text-slate-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:border-slate-400 bg-white"
+                      placeholder="e.g. Advanced Machine Learning"
+                      required
+                      className="w-full border border-slate-300 p-2.5 rounded-lg text-sm text-black bg-white font-medium focus:outline-none focus:border-slate-500 placeholder-slate-400"
                     />
                   </div>
-
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 tracking-wider">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider">
+                      Department
+                    </label>
+                    <input
+                      value={formDept}
+                      onChange={(e) => setFormDept(e.target.value)}
+                      placeholder="e.g. Computer Science"
+                      required
+                      className="w-full border border-slate-300 p-2.5 rounded-lg text-sm text-black bg-white font-medium focus:outline-none focus:border-slate-500 placeholder-slate-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider">
                       Assigned Instructor
                     </label>
                     <input
-                      type="text"
-                      required
-                      placeholder="e.g. Prof. W.O. Ismaila"
                       value={formInstructor}
                       onChange={(e) => setFormInstructor(e.target.value)}
-                      className="w-full text-sm text-slate-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:border-slate-400 bg-white"
+                      placeholder="e.g. Prof. W.O. Ismaila"
+                      required
+                      className="w-full border border-slate-300 p-2.5 rounded-lg text-sm text-black bg-white font-medium focus:outline-none focus:border-slate-500 placeholder-slate-400"
                     />
                   </div>
-
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 tracking-wider">
+                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1 tracking-wider">
                       Term Duration
                     </label>
                     <input
-                      type="text"
-                      required
-                      placeholder="e.g. 4 Months"
                       value={formDuration}
                       onChange={(e) => setFormDuration(e.target.value)}
-                      className="w-full text-sm text-slate-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:border-slate-400 bg-white"
+                      placeholder="e.g. 4 Months"
+                      required
+                      className="w-full border border-slate-300 p-2.5 rounded-lg text-sm text-black bg-white font-medium focus:outline-none focus:border-slate-500 placeholder-slate-400"
                     />
                   </div>
                 </>
               )}
 
-              {/* Modal Footer Controls */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-2.5 mt-6">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 mt-5">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 rounded-lg text-sm font-medium transition-colors"
+                  className="px-4 py-2 border border-slate-300 hover:bg-slate-50 text-slate-800 font-semibold rounded-lg text-sm transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className={`px-4 py-2 text-white rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-5 py-2 text-white font-semibold rounded-lg text-sm transition-colors shadow-sm ${
                     modalMode === "delete"
                       ? "bg-red-600 hover:bg-red-700"
                       : "bg-[#615000] hover:bg-[#4d3f00]"
                   }`}
                 >
-                  {modalMode === "add" && "Save Course"}
-                  {modalMode === "edit" && "Update Class"}
-                  {modalMode === "delete" && "Delete Permanently"}
+                  {modalMode === "delete" ? "Confirm Delete" : "Save Changes"}
                 </button>
               </div>
             </form>

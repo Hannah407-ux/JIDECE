@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Sidebar from "@/app/components/sidebar";
 import {
   Users,
@@ -6,11 +9,12 @@ import {
   TrendingUp,
   ArrowUpRight,
   ArrowDownRight,
-  Plus,
+  Menu,
 } from "lucide-react";
 
 export default function AdminDashboardPage() {
-  // Mock data for display cards
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const stats = [
     {
       title: "Total Students",
@@ -58,148 +62,130 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="flex h-screen w-full bg-[#f8fafc] overflow-hidden">
-      {/* 1. Sidebar Column */}
-      <Sidebar />
+      {/* Sidebar */}
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
-      {/* 2. Main Content Canvas */}
+      {/* Backdrop (mobile only) */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        {/* Top Navigation Bar */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0">
-          <div>
-            <h1 className="text-xl font-semibold text-slate-900">Dashboard</h1>
-            <p className="text-xs text-slate-500">
-              Welcome back! Here's what's happening today.
-            </p>
-          </div>
+        {/* Header */}
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-6 lg:px-8 shrink-0">
+          <div className="flex items-center gap-3">
+            {/* Hamburger */}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden p-2 rounded-md border border-slate-200"
+            >
+              <Menu className="w-5 h-5 bg-black" />
+            </button>
 
-          {/* Quick Action Button */}
-          <button className="flex items-center gap-2 bg-[#615000] hover:bg-[#4d3f00] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
-            <Plus className="w-4 h-4" />
-            <span>Enroll Student</span>
-          </button>
+            <div>
+              <h1 className="text-xl font-semibold text-slate-900">
+                Dashboard
+              </h1>
+              <p className="text-xs text-slate-500">
+                Welcome back! Here's what's happening today.
+              </p>
+            </div>
+          </div>
         </header>
 
-        {/* Dashboard Content Container */}
-        <div className="p-8 space-y-8 max-w-7xl w-full mx-auto">
-          {/* Grid: Stat Metric Cards */}
+        {/* Content */}
+        <div className="p-6 lg:p-8 space-y-8 max-w-7xl w-full mx-auto">
+          {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {stats.map((stat, i) => {
               const Icon = stat.icon;
+
               return (
                 <div
                   key={i}
                   className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between"
                 >
                   <div className="space-y-2">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-slate-500 uppercase">
                       {stat.title}
                     </span>
-                    <h3 className="text-3xl font-bold text-slate-900 tracking-tight">
+                    <h3 className="text-3xl font-bold text-slate-900">
                       {stat.value}
                     </h3>
 
-                    {/* Trend chip */}
-                    <div className="flex items-center gap-1 text-xs">
+                    <div className="flex items-center gap-2 text-xs">
                       {stat.trend === "up" ? (
-                        <span className="text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-0.5 font-medium">
-                          <ArrowUpRight className="w-3 h-3" /> {stat.change}
+                        <span className="text-emerald-600 flex items-center gap-1">
+                          <ArrowUpRight className="w-3 h-3" />
+                          {stat.change}
                         </span>
                       ) : (
-                        <span className="text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded flex items-center gap-0.5 font-medium">
-                          <ArrowDownRight className="w-3 h-3" /> {stat.change}
+                        <span className="text-rose-600 flex items-center gap-1">
+                          <ArrowDownRight className="w-3 h-3" />
+                          {stat.change}
                         </span>
                       )}
                       <span className="text-slate-400">vs last month</span>
                     </div>
                   </div>
 
-                  <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-700 border border-slate-100">
-                    <Icon className="w-6 h-6" />
+                  <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-slate-700" />
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Grid: Secondary Content Split */}
+          {/* Bottom Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left Box: Performance Chart Placeholder */}
-            <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between min-h-[320px]">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="font-semibold text-slate-900">
-                    Analytics Overview
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Student enrollment metrics over time
-                  </p>
-                </div>
-                <div className="flex items-center gap-1 text-xs font-medium text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">
-                  <TrendingUp className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Real-time data</span>
-                </div>
-              </div>
+            {/* Chart */}
+            <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 min-h-[320px]">
+              <h3 className="font-semibold">Analytics Overview</h3>
+              <p className="text-xs text-slate-500 mb-4">
+                Student enrollment metrics over time
+              </p>
 
-              {/* Minimal Wireframe Background for Chart Context */}
-              <div className="flex-1 w-full bg-slate-50/70 rounded-xl border border-dashed border-slate-200 flex flex-col items-center justify-center p-6 text-center">
-                <span className="text-sm font-medium text-slate-400">
-                  Chart Visualization Space
-                </span>
-                <span className="text-xs text-slate-400 max-w-xs mt-1">
-                  Integrate Recharts or Chart.js here to map data pathways.
+              <div className="flex-1 bg-slate-50 rounded-xl border border-dashed border-slate-200 flex items-center justify-center h-[220px]">
+                <span className="text-slate-400 text-sm">
+                  Chart Area (Recharts / Chart.js)
                 </span>
               </div>
             </div>
 
-            {/* Right Box: Recent Activity Feed */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="font-semibold text-slate-900">
-                    New Registrations
-                  </h3>
-                  <a
-                    href="#"
-                    className="text-xs font-medium text-[#615000] hover:underline"
-                  >
-                    View all
-                  </a>
-                </div>
+            {/* Activity */}
+            <div className="bg-white p-6 rounded-2xl border border-slate-200">
+              <h3 className="font-semibold mb-4">New Registrations</h3>
 
-                <div className="space-y-4">
-                  {recentStudents.map((student, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between group"
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-700 uppercase">
-                          {student.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </div>
-                        <div className="min-w-0">
-                          <h4 className="text-xs font-semibold text-slate-900 truncate">
-                            {student.name}
-                          </h4>
-                          <p className="text-[11px] text-slate-500 truncate">
-                            {student.course}
-                          </p>
-                        </div>
+              <div className="space-y-4">
+                {recentStudents.map((student, idx) => (
+                  <div key={idx} className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold">
+                        {student.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
                       </div>
-                      <span className="text-[10px] font-medium text-slate-400 whitespace-nowrap">
-                        {student.date}
-                      </span>
+                      <div>
+                        <h4 className="text-xs font-semibold">
+                          {student.name}
+                        </h4>
+                        <p className="text-[11px] text-slate-500">
+                          {student.course}
+                        </p>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="border-t border-slate-100 pt-4 mt-6 text-center">
-                <p className="text-[11px] text-slate-400">
-                  System Activity Check: Healthy
-                </p>
+                    <span className="text-[10px] text-slate-400">
+                      {student.date}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
