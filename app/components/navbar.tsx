@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -10,9 +11,13 @@ export default function Navbar() {
     <nav className="bg-blue-900 text-white shadow-md fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-lg sm:text-2xl font-bold">
-          Jidece International Academy
-        </Link>
+        <Image
+          src="/logo.png"
+          alt="Jidece International Academy Logo"
+          width={50}
+          height={50}
+          className="rounded-full object-center "
+        />
 
         {/* Mobile button */}
         <button
