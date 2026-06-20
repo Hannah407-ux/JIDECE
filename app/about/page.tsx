@@ -101,12 +101,12 @@ export default function AboutPage() {
 
               <div className="bg-white mt-6 p-8 rounded-2xl shadow-sm">
                 <p className="text-gray-600 italic leading-8">
-                  "Welcome to Jidece International Academy. For over two
+                  Welcome to Jidece International Academy. For over two
                   decades, we have been committed to not just educating minds,
                   but shaping character. Our tradition provides a strong
                   foundation, while modern innovation builds the structures of
                   the future. We invite you to join our community of scholars,
-                  where every voice is heard and every potential is nurtured."
+                  where every voice is heard and every potential is nurtured.
                 </p>
 
                 <p className="mt-6 font-medium">
