@@ -4,7 +4,7 @@ export default function SocialLinks() {
   return (
     <div className="flex gap-6">
       <a
-        href="https://facebook.com/Jidece international Academy"
+        href="https://facebook.com/Jidece"
         target="_blank"
         rel="noopener noreferrer"
       >

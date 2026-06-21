@@ -59,20 +59,25 @@ export default function Footer() {
               Connect With Us
             </h3>
 
-            <div className="flex flex-wrap gap-3">
-              {[
-                FaFacebook,
-                FaWhatsapp,
-              ].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-900 hover:bg-yellow-400 hover:text-black transition"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
+            <div className="flex gap-6">
+      <a
+        href="https://facebook.com/JideceAcademyOgbomoso"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaFacebook size={30} />
+      </a>
+
+      <a
+         href="https://wa.me/2348084654907"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaWhatsapp size={30} />
+      </a>
+
+      
+    </div>
           </div>
 
           {/* NEWSLETTER */}

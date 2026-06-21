@@ -42,12 +42,6 @@ export default function Navbar() {
             Apply Now
           </Link>
 
-          <Link
-            href="/admin/login"
-            className="border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-900"
-          >
-            Admin Login
-          </Link>
         </div>
       </div>
 
@@ -73,14 +67,6 @@ export default function Navbar() {
             className="block"
           >
             Contact Us
-          </Link>
-
-          <Link
-            onClick={() => setOpen(false)}
-            href="/apply"
-            className="block bg-yellow-500 text-black px-4 py-2 rounded-lg font-medium"
-          >
-            Apply Now
           </Link>
 
           <Link
