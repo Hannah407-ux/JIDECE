@@ -21,9 +21,6 @@ export default function Footer() {
                 ["Home", "/"],
                 ["About Us", "/about"],
                 ["Academics", "/academics"],
-                ["News & Events", "/news-events"],
-                ["Gallery", "/gallery"],
-                ["Contact", "/contact"],
               ].map(([name, href]) => (
                 <li key={name}>
                   <Link
@@ -80,31 +77,6 @@ export default function Footer() {
     </div>
           </div>
 
-          {/* NEWSLETTER */}
-          <div>
-            <h3 className="text-lg md:text-xl font-semibold mb-4">
-              Newsletter
-            </h3>
-
-            <p className="text-sm text-gray-300 mb-4">
-              Get updates about admissions, news and events.
-            </p>
-
-            <form className="space-y-3">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="w-full px-4 py-3 rounded-lg text-black outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-3 rounded-lg transition"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
         </div>
 
         {/* DIVIDER */}
